@@ -4,7 +4,7 @@ import { Upload, FileText, Database, TrendingUp, Clock, CheckCircle2, ArrowRight
 import { useNavigate } from 'react-router-dom';
 import { BarChart, Bar, PieChart as RechartsChart, Pie, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, LineChart, Line } from 'recharts';
 
-const API_URL = 'http://localhost:5000/api';
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
 
 const Dashboard = () => {
     const [stats, setStats] = useState({ datasets: 0, models: 0 });

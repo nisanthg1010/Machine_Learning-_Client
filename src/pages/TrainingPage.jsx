@@ -5,6 +5,9 @@ import { PlayCircle, Settings, AlertCircle, Zap, Target, Activity, TrendingUp, A
 import { ResponsiveContainer, LineChart, Line, CartesianGrid, XAxis, YAxis, Tooltip, BarChart, Bar, Legend } from 'recharts';
 import VideoExplainer from '../components/VideoExplainer';
 
+const ML_API_URL = import.meta.env.VITE_ML_API_URL || 'http://localhost:5000';
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
+
 const ALGORITHMS = [
     { name: 'Linear Regression', type: 'regression', desc: 'Predict continuous values using a line.', icon: '📈', color: 'from-blue-500 to-cyan-500' },
     { name: 'Logistic Regression', type: 'classification', desc: 'Binary classification using sigmoid.', icon: '🎯', color: 'from-purple-500 to-pink-500' },
@@ -47,7 +50,7 @@ const TrainingPage = () => {
 
     const fetchDatasets = async () => {
         try {
-            const res = await axios.get('http://localhost:5000/api/datasets');
+            const res = await axios.get(`${API_URL}/datasets`);
             setDatasets(res.data);
         } catch (err) {
             console.error(err);
@@ -106,7 +109,7 @@ const TrainingPage = () => {
         setResult(null);
 
         try {
-            const res = await axios.post('http://localhost:5000/api/ml/train', {
+            const res = await axios.post(`${ML_API_URL}/api/ml/train`, {
                 datasetId: selectedDatasetId,
                 algorithm: selectedAlgo,
                 targetColumn,
