@@ -1,0 +1,35 @@
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "client/package.json",
+      "use": "@vercel/static-build",
+      "config": { 
+        "distDir": "client/dist",
+        "buildCommand": "cd client && npm install && npm run build"
+      }
+    },
+    {
+      "src": "server/index.js",
+      "use": "@vercel/node"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/api/(.*)",
+      "dest": "server/index.js"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "client/dist/$1"
+    },
+    {
+      "src": "/(.+)",
+      "dest": "client/dist/index.html"
+    }
+  ],
+  "env": {
+    "ML_SERVICE_URL": "@ml_service_url",
+    "MONGO_URI": "@mongo_uri"
+  }
+}
