@@ -27,9 +27,5 @@
       "src": "/(.+)",
       "dest": "client/dist/index.html"
     }
-  ],
-  "env": {
-    "ML_SERVICE_URL": "@ml_service_url",
-    "MONGO_URI": "@mongo_uri"
-  }
+  ]
 }
